@@ -3,12 +3,9 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QFontDatabase, QFont, QIcon
-from PyQt5.QtCore import QFile, QTextStream, QTranslator, QLocale
+from PyQt5.QtCore import QFile, QTextStream
 
 from .views.MainWindow import MainWindow
-
-from .ui import resources_rc  # noqa
-
 
 def main():
     app = QApplication(sys.argv)
@@ -25,7 +22,8 @@ def main():
     f.close()
 
     mw = MainWindow()
-    mw.show()
+    mw.showFullScreen()
+    # mw.show()
 
     sys.exit(app.exec_())
 
