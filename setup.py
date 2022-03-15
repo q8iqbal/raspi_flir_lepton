@@ -65,7 +65,6 @@ cmdclass["sdist"] = custom_sdist
 
 class run_app(sdist):
     def run(self):
-        self.run_command("build_res")
         os.system("python -m app")
 
 cmdclass["run_app"] = run_app
