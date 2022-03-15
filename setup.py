@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+
+from pathlib import Path
 import re
 import os
 import subprocess
 import sys
 
-from setuptools import setup, find_packages, Command
+from setuptools import setup, find_packages, Command, Extension
 from setuptools.command.sdist import sdist
 from distutils.command.build_ext import build_ext
 
@@ -92,8 +94,6 @@ cmdclass["bdist_app"] = bdist_app
 
 class CMakeBuild(build_ext):
 
-    
-
     def run(self):
         try:
             out = subprocess.check_output(['cmake', '--version'])
@@ -105,7 +105,8 @@ class CMakeBuild(build_ext):
         self.build_temp = "./lepton/wrapper"
         self.extensions = ["cpp"]
 
-        build_directory = os.path.abspath(self.build_temp)
+        build_directory = os.path.abspath("./lepton/lib")
+        self.clear_build(build_directory)
 
         cmake_args = [
             '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + build_directory,
@@ -131,7 +132,7 @@ class CMakeBuild(build_ext):
 
         # CMakeLists.txt is in the same directory as this setup.py file
         # cmake_list_dir = os.path.abspath(os.path.dirname(__file__))
-        cmake_list_dir = build_directory
+        cmake_list_dir = os.path.abspath(self.build_temp)
         print('-'*10, 'Running CMake prepare', '-'*40)
         subprocess.check_call(['cmake', cmake_list_dir] + cmake_args,
                               cwd=self.build_temp, env=env)
@@ -141,9 +142,12 @@ class CMakeBuild(build_ext):
         subprocess.check_call(cmake_cmd,
                               cwd=self.build_temp)
 
+    def clear_build(self, build_dir:str):
+        for root, _, files in os.walk(build_dir):
+            for file in files:
+                os.remove(os.path.join(root, file))
+
 cmdclass["build_sdk"] = CMakeBuild
-
-
 
 CURDIR = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(CURDIR, "requirements.txt")) as requirements:
