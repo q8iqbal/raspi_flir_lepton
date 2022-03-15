@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "lepton_types.h": "c",
+        "iostream": "cpp",
+        "crc16.h": "c",
+        "lepton_errorcodes.h": "c"
+    }
+}
