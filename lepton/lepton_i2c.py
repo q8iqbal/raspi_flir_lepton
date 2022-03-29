@@ -1,4 +1,3 @@
-from mimetypes import init
 from lib import lepton_sdk, lepton_sys, lepton_oem, lepton_type
 
 class LeptonI2c :
