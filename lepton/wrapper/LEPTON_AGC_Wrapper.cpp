@@ -94,7 +94,11 @@ PYBIND11_MODULE(lepton_agc, handle){
     handle.def("LEP_SetAgcPolicy", &LEP_SetAgcPolicy);
     handle.def("LEP_GetAgcROI", &LEP_GetAgcROI);
     handle.def("LEP_SetAgcROI", &LEP_SetAgcROI);
-    handle.def("LEP_GetAgcHistogramStatistics", &LEP_GetAgcHistogramStatistics);
+    // handle.def("LEP_GetAgcHistogramStatistics", &LEP_GetAgcHistogramStatistics);
+    handle.def("LEP_GetAgcHistogramStatistics", [](LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                                 LEP_AGC_HISTOGRAM_STATISTICS_T *agcHistogramStatisticsPtr){
+        return LEP_GetAgcHistogramStatistics(portDescPtr, &agcHistogramStatisticsPtr);
+    });
 
     handle.def("LEP_GetAgcLinearHistogramTailSize", &LEP_GetAgcLinearHistogramTailSize);
     handle.def("LEP_SetAgcLinearHistogramTailSize", &LEP_SetAgcLinearHistogramTailSize);
