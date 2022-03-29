@@ -32,9 +32,9 @@ PYBIND11_MODULE(lepton_macros, handle){
         return HIGH_NIBBLE(w);
     });
 
-    handle.def("clr_bit", [](auto _port, auto _bit){
-        return CLR_BIT(_port,_bit);
-    });
+    // handle.def("clr_bit", [](auto _port, auto _bit){
+    //     return CLR_BIT(_port,_bit);
+    // });
 
     handle.def("reverse_endieness_uint16", [](uint16_t var){
         return REVERSE_ENDIENESS_UINT16(var);

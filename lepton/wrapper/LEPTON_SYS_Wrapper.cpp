@@ -1,4 +1,14 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/functional.h>
+#include <pybind11/stl_bind.h>
+#include <pybind11/embed.h>
+#include <pybind11/pytypes.h>
+#include <pybind11/numpy.h>
+#include <array>
+#include <pybind11/stl.h>
+#include <pybind11/complex.h>
+#include <pybind11/functional.h> 
+#include <pybind11/chrono.h>
 
 #include "../sdk/LEPTON_SYS.h"
 
@@ -31,7 +41,11 @@ PYBIND11_MODULE(lepton_sys, handle){
 
     py::class_<LEP_SYS_CUST_SERIAL_NUMBER_T>(handle,"LEP_SYS_CUST_SERIAL_NUMBER_T")
         .def(py::init<>())
-        .def_readwrite("value", &LEP_SYS_CUST_SERIAL_NUMBER_T::value);
+        // .def_readwrite("value", &LEP_SYS_CUST_SERIAL_NUMBER_T::value);
+        .def_property("value", [](LEP_SYS_CUST_SERIAL_NUMBER_T &p)->py::array {
+            auto dtype = py::dtype(py::format_descriptor<LEP_CHAR8>::format());
+            return pybind11::array(dtype, { LEP_SYS_MAX_SERIAL_NUMBER_CHAR_SIZE }, { sizeof(LEP_CHAR8) }, p.value, nullptr);
+        }, [](LEP_SYS_CUST_SERIAL_NUMBER_T& p) {});
 
     py::enum_<LEP_SYSTEM_STATUS_STATES_E_TAG>(handle,"LEP_SYSTEM_STATUS_STATES_E_TAG")
         .value("LEP_SYSTEM_READY",LEP_SYSTEM_STATUS_STATES_E_TAG::LEP_SYSTEM_READY)
