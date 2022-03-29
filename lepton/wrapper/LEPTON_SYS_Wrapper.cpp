@@ -44,7 +44,7 @@ PYBIND11_MODULE(lepton_sys, handle){
         // .def_readwrite("value", &LEP_SYS_CUST_SERIAL_NUMBER_T::value);
         .def_property("value", [](LEP_SYS_CUST_SERIAL_NUMBER_T &p)->py::array {
             auto dtype = py::dtype(py::format_descriptor<LEP_CHAR8>::format());
-            return pybind11::array(dtype, { LEP_SYS_MAX_SERIAL_NUMBER_CHAR_SIZE }, { sizeof(LEP_CHAR8) }, p.value, nullptr);
+            return py::array(dtype, { LEP_SYS_MAX_SERIAL_NUMBER_CHAR_SIZE }, { sizeof(LEP_CHAR8) }, p.value, nullptr);
         }, [](LEP_SYS_CUST_SERIAL_NUMBER_T& p) {});
 
     py::enum_<LEP_SYSTEM_STATUS_STATES_E_TAG>(handle,"LEP_SYSTEM_STATUS_STATES_E_TAG")

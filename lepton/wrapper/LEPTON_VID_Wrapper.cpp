@@ -1,5 +1,14 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/functional.h>
+#include <pybind11/stl_bind.h>
+#include <pybind11/embed.h>
+#include <pybind11/pytypes.h>
+#include <pybind11/numpy.h>
+#include <array>
 #include <pybind11/stl.h>
+#include <pybind11/complex.h>
+#include <pybind11/functional.h> 
+#include <pybind11/chrono.h>
 
 #include "../sdk/LEPTON_VID.h"
 
@@ -49,7 +58,11 @@ PYBIND11_MODULE(lepton_vid, handle){
 
     py::class_<LEP_VID_LUT_BUFFER_T>(handle,"LEP_VID_LUT_BUFFER_T")
         .def(py::init<>())
-        .def_readwrite("bin",&LEP_VID_LUT_BUFFER_T::bin);
+        // .def_readwrite("bin",&LEP_VID_LUT_BUFFER_T::bin);
+        .def_property("bin", [](LEP_VID_LUT_BUFFER_T &p)->py::array {
+            auto dtype = py::dtype(py::format_descriptor<LEP_VID_LUT_PIXEL_T>::format());
+            return py::array(dtype, { 256 }, { sizeof(LEP_VID_LUT_PIXEL_T) }, p.bin, nullptr);
+        }, [](LEP_VID_LUT_BUFFER_T& p) {});
 
     py::enum_<LEP_VID_ENABLE_TAG>(handle,"LEP_VID_ENABLE_TAG")
         .value("LEP_VID_FOCUS_CALC_DISABLE",LEP_VID_ENABLE_TAG::LEP_VID_FOCUS_CALC_DISABLE)

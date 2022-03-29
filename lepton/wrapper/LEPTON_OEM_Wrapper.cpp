@@ -1,4 +1,14 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/functional.h>
+#include <pybind11/stl_bind.h>
+#include <pybind11/embed.h>
+#include <pybind11/pytypes.h>
+#include <pybind11/numpy.h>
+#include <array>
+#include <pybind11/stl.h>
+#include <pybind11/complex.h>
+#include <pybind11/functional.h> 
+#include <pybind11/chrono.h>
 
 #include "../sdk/LEPTON_OEM.h"
 
@@ -42,7 +52,11 @@ PYBIND11_MODULE(lepton_oem, handle){
 
     py::class_<LEP_OEM_PART_NUMBER_T>(handle, "LEP_OEM_PART_NUMBER_T")
         .def(py::init<>())
-        .def_readwrite("value", &LEP_OEM_PART_NUMBER_T::value);
+        // .def_readwrite("value", &LEP_OEM_PART_NUMBER_T::value);
+        .def_property("value", [](LEP_OEM_PART_NUMBER_T &p)->py::array {
+            auto dtype = py::dtype(py::format_descriptor<LEP_CHAR8>::format());
+            return py::array(dtype, { LEP_OEM_MAX_PART_NUMBER_CHAR_SIZE }, { sizeof(LEP_CHAR8) }, p.value, nullptr);
+        }, [](LEP_OEM_PART_NUMBER_T& p) {});
 
     py::class_<LEP_OEM_SW_VERSION_T>(handle, "LEP_OEM_SW_VERSION_T")
         .def(py::init<>())
