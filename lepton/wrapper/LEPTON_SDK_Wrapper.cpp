@@ -11,17 +11,17 @@ PYBIND11_MODULE(lepton_sdk, handle){
     handle.attr("LEP_SDK_MODULE_BASE") = py::int_(LEP_SDK_MODULE_BASE);
     handle.attr("LEP_SDK_ENABLE_STATE") = py::int_(LEP_SDK_ENABLE_STATE);
 
-    py::class_<LEP_SDK_VERSION_T>(handle,"LEP_SDK_VERSION_T")
+    py::class_<LEP_SDK_VERSION_TAG>(handle,"LEP_SDK_VERSION_TAG")
         .def(py::init<>())
-        .def_readwrite("major",&LEP_SDK_VERSION_T::major)
-        .def_readwrite("minor",&LEP_SDK_VERSION_T::minor)
-        .def_readwrite("build",&LEP_SDK_VERSION_T::build)
-        .def_readwrite("reserved",&LEP_SDK_VERSION_T::reserved);
+        .def_readwrite("major",&LEP_SDK_VERSION_TAG::major)
+        .def_readwrite("minor",&LEP_SDK_VERSION_TAG::minor)
+        .def_readwrite("build",&LEP_SDK_VERSION_TAG::build)
+        .def_readwrite("reserved",&LEP_SDK_VERSION_TAG::reserved);
     
-    py::enum_<LEP_SDK_BOOT_STATUS_E>(handle,"LEP_SDK_BOOT_STATUS_E")
-        .value("LEP_BOOT_STATUS_NOT_BOOTED",LEP_SDK_BOOT_STATUS_E::LEP_BOOT_STATUS_NOT_BOOTED)
-        .value("LEP_BOOT_STATUS_BOOTED",LEP_SDK_BOOT_STATUS_E::LEP_BOOT_STATUS_BOOTED)
-        .value("LEP_END_BOOT_STATUS",LEP_SDK_BOOT_STATUS_E::LEP_END_BOOT_STATUS)
+    py::enum_<LEP_SDK_BOOT_STATUS_E_TAG>(handle,"LEP_SDK_BOOT_STATUS_E_TAG")
+        .value("LEP_BOOT_STATUS_NOT_BOOTED",LEP_SDK_BOOT_STATUS_E_TAG::LEP_BOOT_STATUS_NOT_BOOTED)
+        .value("LEP_BOOT_STATUS_BOOTED",LEP_SDK_BOOT_STATUS_E_TAG::LEP_BOOT_STATUS_BOOTED)
+        .value("LEP_END_BOOT_STATUS",LEP_SDK_BOOT_STATUS_E_TAG::LEP_END_BOOT_STATUS)
         .export_values();
 
     handle.def("LEP_OpenPort",&LEP_OpenPort);

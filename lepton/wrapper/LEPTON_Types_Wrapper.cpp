@@ -39,30 +39,30 @@ PYBIND11_MODULE(lepton_type, handle){
         .value("LEP_ON",LEP_ON_STATE::LEP_ON)
         .export_values();
 
-    py::enum_<LEP_CAMERA_PORT_E>(handle,"LEP_CAMERA_PORT_E")
-        .value("LEP_CCI_TWI",LEP_CAMERA_PORT_E::LEP_CCI_TWI)
-        .value("LEP_CCI_SPI",LEP_CAMERA_PORT_E::LEP_CCI_SPI)
-        .value("LEP_END_CCI_PORTS",LEP_CAMERA_PORT_E::LEP_END_CCI_PORTS)
+    py::enum_<LEP_CAMERA_PORT_E_TAG>(handle,"LEP_CAMERA_PORT_E_TAG")
+        .value("LEP_CCI_TWI",LEP_CAMERA_PORT_E_TAG::LEP_CCI_TWI)
+        .value("LEP_CCI_SPI",LEP_CAMERA_PORT_E_TAG::LEP_CCI_SPI)
+        .value("LEP_END_CCI_PORTS",LEP_CAMERA_PORT_E_TAG::LEP_END_CCI_PORTS)
         .export_values();
     
-    py::enum_<LEP_TWI_CLOCK_RATE_T>(handle,"LEP_TWI_CLOCK_RATE_T")
-        .value("LEP_TWI_CLOCK_100KHZ",LEP_TWI_CLOCK_RATE_T::LEP_TWI_CLOCK_100KHZ)
-        .value("LEP_TWI_CLOCK_400KHZ",LEP_TWI_CLOCK_RATE_T::LEP_TWI_CLOCK_400KHZ)
-        .value("LEP_TWI_CLOCK_1MHZ",LEP_TWI_CLOCK_RATE_T::LEP_TWI_CLOCK_1MHZ)
-        .value("LEP_END_TWI_CLOCK_RATE",LEP_TWI_CLOCK_RATE_T::LEP_END_TWI_CLOCK_RATE)
+    py::enum_<LEP_TWI_CLOCK_RATE_T_TAG>(handle,"LEP_TWI_CLOCK_RATE_T_TAG")
+        .value("LEP_TWI_CLOCK_100KHZ",LEP_TWI_CLOCK_RATE_T_TAG::LEP_TWI_CLOCK_100KHZ)
+        .value("LEP_TWI_CLOCK_400KHZ",LEP_TWI_CLOCK_RATE_T_TAG::LEP_TWI_CLOCK_400KHZ)
+        .value("LEP_TWI_CLOCK_1MHZ",LEP_TWI_CLOCK_RATE_T_TAG::LEP_TWI_CLOCK_1MHZ)
+        .value("LEP_END_TWI_CLOCK_RATE",LEP_TWI_CLOCK_RATE_T_TAG::LEP_END_TWI_CLOCK_RATE)
         .export_values();
 
-    py::enum_<LEP_SPI_CLOCK_RATE_T>(handle,"LEP_SPI_CLOCK_RATE_T")
-        .value("LEP_SPI_CLOCK_2MHZ",LEP_SPI_CLOCK_RATE_T::LEP_SPI_CLOCK_2MHZ)
-        .value("LEP_SPI_CLOCK_10MHZ",LEP_SPI_CLOCK_RATE_T::LEP_SPI_CLOCK_10MHZ)
-        .value("LEP_SPI_CLOCK_20MHZ",LEP_SPI_CLOCK_RATE_T::LEP_SPI_CLOCK_20MHZ)
-        .value("LEP_END_SPI_CLOCK_RATE",LEP_SPI_CLOCK_RATE_T::LEP_END_SPI_CLOCK_RATE)
+    py::enum_<LEP_SPI_CLOCK_RATE_T_TAG>(handle,"LEP_SPI_CLOCK_RATE_T_TAG")
+        .value("LEP_SPI_CLOCK_2MHZ",LEP_SPI_CLOCK_RATE_T_TAG::LEP_SPI_CLOCK_2MHZ)
+        .value("LEP_SPI_CLOCK_10MHZ",LEP_SPI_CLOCK_RATE_T_TAG::LEP_SPI_CLOCK_10MHZ)
+        .value("LEP_SPI_CLOCK_20MHZ",LEP_SPI_CLOCK_RATE_T_TAG::LEP_SPI_CLOCK_20MHZ)
+        .value("LEP_END_SPI_CLOCK_RATE",LEP_SPI_CLOCK_RATE_T_TAG::LEP_END_SPI_CLOCK_RATE)
         .export_values();
 
-    py::class_<LEP_CAMERA_PORT_DESC_T>(handle,"LEP_CAMERA_PORT_DESC_T")
+    py::class_<LEP_CAMERA_PORT_DESC_T_TAG>(handle,"LEP_CAMERA_PORT_DESC_T_TAG")
         .def(py::init<>())
-        .def_readwrite("portID",&LEP_CAMERA_PORT_DESC_T::portID)
-        .def_readwrite("portType",&LEP_CAMERA_PORT_DESC_T::portType)
-        .def_readwrite("portBaudRate",&LEP_CAMERA_PORT_DESC_T::portBaudRate)
-        .def_readwrite("deviceAddress",&LEP_CAMERA_PORT_DESC_T::deviceAddress);
+        .def_readwrite("portID",&LEP_CAMERA_PORT_DESC_T_TAG::portID)
+        .def_readwrite("portType",&LEP_CAMERA_PORT_DESC_T_TAG::portType)
+        .def_readwrite("portBaudRate",&LEP_CAMERA_PORT_DESC_T_TAG::portBaudRate)
+        .def_readwrite("deviceAddress",&LEP_CAMERA_PORT_DESC_T_TAG::deviceAddress);
 }

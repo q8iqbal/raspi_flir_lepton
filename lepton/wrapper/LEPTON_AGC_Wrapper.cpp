@@ -63,24 +63,31 @@ PYBIND11_MODULE(lepton_agc, handle){
     handle.attr("LEP_AGC_MIN_COL") = py::int_(LEP_AGC_MIN_COL);
     handle.attr("LEP_AGC_MIN_ROW") = py::int_(LEP_AGC_MIN_ROW);
 
-    py::enum_<LEP_AGC_ENABLE_E>(handle,"LEP_AGC_ENABLE_E")
-        .value("LEP_AGC_DISABLE", LEP_AGC_ENABLE_E::LEP_AGC_DISABLE)
-        .value("LEP_AGC_ENABLE", LEP_AGC_ENABLE_E::LEP_AGC_ENABLE)
-        .value("LEP_END_AGC_ENABLE", LEP_AGC_ENABLE_E::LEP_END_AGC_ENABLE)
+    py::enum_<LEP_AGC_ENABLE_TAG>(handle,"LEP_AGC_ENABLE_TAG")
+        .value("LEP_AGC_DISABLE", LEP_AGC_ENABLE_TAG::LEP_AGC_DISABLE)
+        .value("LEP_AGC_ENABLE", LEP_AGC_ENABLE_TAG::LEP_AGC_ENABLE)
+        .value("LEP_END_AGC_ENABLE", LEP_AGC_ENABLE_TAG::LEP_END_AGC_ENABLE)
         .export_values();
 
-    py::enum_<LEP_AGC_POLICY_E>(handle,"LEP_AGC_POLICY_E")
-        .value("LEP_AGC_LINEAR", LEP_AGC_POLICY_E::LEP_AGC_LINEAR)
-        .value("LEP_AGC_HEQ", LEP_AGC_POLICY_E::LEP_AGC_HEQ)
-        .value("LEP_END_AGC_POLICY", LEP_AGC_POLICY_E::LEP_END_AGC_POLICY)
+    py::enum_<LEP_AGC_POLICY_TAG>(handle,"LEP_AGC_POLICY_TAG")
+        .value("LEP_AGC_LINEAR", LEP_AGC_POLICY_TAG::LEP_AGC_LINEAR)
+        .value("LEP_AGC_HEQ", LEP_AGC_POLICY_TAG::LEP_AGC_HEQ)
+        .value("LEP_END_AGC_POLICY", LEP_AGC_POLICY_TAG::LEP_END_AGC_POLICY)
         .export_values();
 
-    py::class_<LEP_AGC_HISTOGRAM_STATISTICS_T>(handle,"LEP_AGC_HISTOGRAM_STATISTICS_T")
+    py::class_<LEP_AGC_ROI_TAG>(handle,"LEP_AGC_ROI_TAG")
         .def(py::init<>())
-        .def_readwrite("minIntensity", &LEP_AGC_HISTOGRAM_STATISTICS_T::minIntensity)
-        .def_readwrite("maxIntensity", &LEP_AGC_HISTOGRAM_STATISTICS_T::maxIntensity)
-        .def_readwrite("meanIntensity", &LEP_AGC_HISTOGRAM_STATISTICS_T::meanIntensity)
-        .def_readwrite("numPixels", &LEP_AGC_HISTOGRAM_STATISTICS_T::numPixels);
+        .def_readwrite("startCol", &LEP_AGC_ROI_TAG::startCol)
+        .def_readwrite("startRow", &LEP_AGC_ROI_TAG::startRow)
+        .def_readwrite("endCol", &LEP_AGC_ROI_TAG::endCol)
+        .def_readwrite("endRow", &LEP_AGC_ROI_TAG::endRow);
+
+    py::class_<LEP_AGC_HISTOGRAM_STATISTICS_TAG>(handle,"LEP_AGC_HISTOGRAM_STATISTICS_TAG")
+        .def(py::init<>())
+        .def_readwrite("minIntensity", &LEP_AGC_HISTOGRAM_STATISTICS_TAG::minIntensity)
+        .def_readwrite("maxIntensity", &LEP_AGC_HISTOGRAM_STATISTICS_TAG::maxIntensity)
+        .def_readwrite("meanIntensity", &LEP_AGC_HISTOGRAM_STATISTICS_TAG::meanIntensity)
+        .def_readwrite("numPixels", &LEP_AGC_HISTOGRAM_STATISTICS_TAG::numPixels);
 
     py::enum_<LEP_AGC_SCALE_FACTOR_E_TAG>(handle,"LEP_AGC_SCALE_FACTOR_E_TAG")
         .value("LEP_AGC_SCALE_TO_8_BITS", LEP_AGC_SCALE_FACTOR_E_TAG::LEP_AGC_SCALE_TO_8_BITS)

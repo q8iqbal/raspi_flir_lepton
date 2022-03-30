@@ -61,37 +61,37 @@ PYBIND11_MODULE(lepton_rad, handle){
     handle.attr("LEP_CID_RAD_ARBITRARY_OFFSET_PARAMS") = py::int_(LEP_CID_RAD_ARBITRARY_OFFSET_PARAMS);
     handle.attr("LEP_CID_RAD_RADIO_CAL_VALUES") = py::int_(LEP_CID_RAD_RADIO_CAL_VALUES);
 
-    py::enum_<LEP_RAD_TS_MODE_E>(handle,"LEP_RAD_TS_MODE_E")
-        .value("LEP_RAD_TS_USER_MODE",LEP_RAD_TS_MODE_E::LEP_RAD_TS_USER_MODE)
-        .value("LEP_RAD_TS_CAL_MODE",LEP_RAD_TS_MODE_E::LEP_RAD_TS_CAL_MODE)
-        .value("LEP_RAD_TS_FIXED_MODE",LEP_RAD_TS_MODE_E::LEP_RAD_TS_FIXED_MODE)
-        .value("LEP_RAD_TS_END_TS_MODE",LEP_RAD_TS_MODE_E::LEP_RAD_TS_END_TS_MODE)
+    py::enum_<LEP_RAD_TS_MODE_E_TAG>(handle,"LEP_RAD_TS_MODE_E_TAG")
+        .value("LEP_RAD_TS_USER_MODE",LEP_RAD_TS_MODE_E_TAG::LEP_RAD_TS_USER_MODE)
+        .value("LEP_RAD_TS_CAL_MODE",LEP_RAD_TS_MODE_E_TAG::LEP_RAD_TS_CAL_MODE)
+        .value("LEP_RAD_TS_FIXED_MODE",LEP_RAD_TS_MODE_E_TAG::LEP_RAD_TS_FIXED_MODE)
+        .value("LEP_RAD_TS_END_TS_MODE",LEP_RAD_TS_MODE_E_TAG::LEP_RAD_TS_END_TS_MODE)
         .export_values();
 
-    py::class_<LEP_RBFO_T>(handle,"LEP_RBFO_T")
+    py::class_<LEP_RBFO_T_TAG>(handle,"LEP_RBFO_T_TAG")
         .def(py::init<>())
-        .def_readwrite("RBFO_R",&LEP_RBFO_T::RBFO_R)
-        .def_readwrite("RBFO_B",&LEP_RBFO_T::RBFO_B)
-        .def_readwrite("RBFO_F",&LEP_RBFO_T::RBFO_F)
-        .def_readwrite("RBFO_O",&LEP_RBFO_T::RBFO_O);
+        .def_readwrite("RBFO_R",&LEP_RBFO_T_TAG::RBFO_R)
+        .def_readwrite("RBFO_B",&LEP_RBFO_T_TAG::RBFO_B)
+        .def_readwrite("RBFO_F",&LEP_RBFO_T_TAG::RBFO_F)
+        .def_readwrite("RBFO_O",&LEP_RBFO_T_TAG::RBFO_O);
 
-    py::class_<LEP_RAD_LINEAR_TEMP_CORRECTION_T>(handle,"LEP_RAD_LINEAR_TEMP_CORRECTION_T")
+    py::class_<LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG>(handle,"LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG")
         .def(py::init<>())
-        .def_readwrite("offset",&LEP_RAD_LINEAR_TEMP_CORRECTION_T::offset)
-        .def_readwrite("gainAux",&LEP_RAD_LINEAR_TEMP_CORRECTION_T::gainAux)
-        .def_readwrite("gainShutter",&LEP_RAD_LINEAR_TEMP_CORRECTION_T::gainShutter)
-        .def_readwrite("pad",&LEP_RAD_LINEAR_TEMP_CORRECTION_T::pad);
+        .def_readwrite("offset",&LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG::offset)
+        .def_readwrite("gainAux",&LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG::gainAux)
+        .def_readwrite("gainShutter",&LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG::gainShutter)
+        .def_readwrite("pad",&LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG::pad);
 
-    py::enum_<LEP_RAD_ENABLE_E>(handle,"LEP_RAD_ENABLE_E")
-        .value("LEP_RAD_DISABLE",LEP_RAD_ENABLE_E::LEP_RAD_DISABLE)
-        .value("LEP_RAD_ENABLE",LEP_RAD_ENABLE_E::LEP_RAD_ENABLE)
-        .value("LEP_END_RAD_ENABLE",LEP_RAD_ENABLE_E::LEP_END_RAD_ENABLE)
+    py::enum_<LEP_RAD_ENABLE_E_TAG>(handle,"LEP_RAD_ENABLE_E_TAG")
+        .value("LEP_RAD_DISABLE",LEP_RAD_ENABLE_E_TAG::LEP_RAD_DISABLE)
+        .value("LEP_RAD_ENABLE",LEP_RAD_ENABLE_E_TAG::LEP_RAD_ENABLE)
+        .value("LEP_END_RAD_ENABLE",LEP_RAD_ENABLE_E_TAG::LEP_END_RAD_ENABLE)
         .export_values();
 
-    py::enum_<LEP_RAD_TEMPERATURE_UPDATE_E>(handle,"LEP_RAD_TEMPERATURE_UPDATE_E")
-        .value("LEP_RAD_NORMAL_UPDATE",LEP_RAD_TEMPERATURE_UPDATE_E::LEP_RAD_NORMAL_UPDATE)
-        .value("LEP_RAD_NO_UPDATE",LEP_RAD_TEMPERATURE_UPDATE_E::LEP_RAD_NO_UPDATE)
-        .value("LEP_RAD_UPDATE_END",LEP_RAD_TEMPERATURE_UPDATE_E::LEP_RAD_UPDATE_END)
+    py::enum_<LEP_RAD_TEMPERATURE_UPDATE_E_TAG>(handle,"LEP_RAD_TEMPERATURE_UPDATE_E_TAG")
+        .value("LEP_RAD_NORMAL_UPDATE",LEP_RAD_TEMPERATURE_UPDATE_E_TAG::LEP_RAD_NORMAL_UPDATE)
+        .value("LEP_RAD_NO_UPDATE",LEP_RAD_TEMPERATURE_UPDATE_E_TAG::LEP_RAD_NO_UPDATE)
+        .value("LEP_RAD_UPDATE_END",LEP_RAD_TEMPERATURE_UPDATE_E_TAG::LEP_RAD_UPDATE_END)
         .export_values();
 
     py::enum_<LEP_RAD_STATUS_E>(handle,"LEP_RAD_STATUS_E")
@@ -113,43 +113,43 @@ PYBIND11_MODULE(lepton_rad, handle){
         .def_readwrite("reflWindow",&LEP_RAD_FLUX_LINEAR_PARAMS_T_TAG::reflWindow)
         .def_readwrite("TReflK",&LEP_RAD_FLUX_LINEAR_PARAMS_T_TAG::TReflK);
 
-    py::enum_<LEP_RAD_TLINEAR_RESOLUTION_E>(handle,"LEP_RAD_TLINEAR_RESOLUTION_E")
-        .value("LEP_RAD_RESOLUTION_0_1",LEP_RAD_TLINEAR_RESOLUTION_E::LEP_RAD_RESOLUTION_0_1)
-        .value("LEP_RAD_RESOLUTION_0_01",LEP_RAD_TLINEAR_RESOLUTION_E::LEP_RAD_RESOLUTION_0_01)
-        .value("LEP_RAD_END_RESOLUTION",LEP_RAD_TLINEAR_RESOLUTION_E::LEP_RAD_END_RESOLUTION)
+    py::enum_<LEP_RAD_TLINEAR_RESOLUTION_E_TAG>(handle,"LEP_RAD_TLINEAR_RESOLUTION_E_TAG")
+        .value("LEP_RAD_RESOLUTION_0_1",LEP_RAD_TLINEAR_RESOLUTION_E_TAG::LEP_RAD_RESOLUTION_0_1)
+        .value("LEP_RAD_RESOLUTION_0_01",LEP_RAD_TLINEAR_RESOLUTION_E_TAG::LEP_RAD_RESOLUTION_0_01)
+        .value("LEP_RAD_END_RESOLUTION",LEP_RAD_TLINEAR_RESOLUTION_E_TAG::LEP_RAD_END_RESOLUTION)
         .export_values();
 
-    py::class_<LEP_RAD_ROI_T>(handle,"LEP_RAD_ROI_T")
+    py::class_<LEP_RAD_ROI_T_TAG>(handle,"LEP_RAD_ROI_T_TAG")
         .def(py::init<>())
-        .def_readwrite("startRow",&LEP_RAD_ROI_T::startRow)
-        .def_readwrite("startCol",&LEP_RAD_ROI_T::startCol)
-        .def_readwrite("endRow",&LEP_RAD_ROI_T::endRow)
-        .def_readwrite("endCol",&LEP_RAD_ROI_T::endCol);
+        .def_readwrite("startRow",&LEP_RAD_ROI_T_TAG::startRow)
+        .def_readwrite("startCol",&LEP_RAD_ROI_T_TAG::startCol)
+        .def_readwrite("endRow",&LEP_RAD_ROI_T_TAG::endRow)
+        .def_readwrite("endCol",&LEP_RAD_ROI_T_TAG::endCol);
 
-    py::enum_<LEP_RAD_ARBITRARY_OFFSET_MODE_E>(handle,"LEP_RAD_ARBITRARY_OFFSET_MODE_E")
-        .value("LEP_RAD_ARBITRARY_OFFSET_MODE_MANUAL",LEP_RAD_ARBITRARY_OFFSET_MODE_E::LEP_RAD_ARBITRARY_OFFSET_MODE_MANUAL)
-        .value("LEP_RAD_ARBITRARY_OFFSET_MODE_AUTO",LEP_RAD_ARBITRARY_OFFSET_MODE_E::LEP_RAD_ARBITRARY_OFFSET_MODE_AUTO)
-        .value("LEP_RAD_END_ARBITRARY_OFFSET_MODE",LEP_RAD_ARBITRARY_OFFSET_MODE_E::LEP_RAD_END_ARBITRARY_OFFSET_MODE)
+    py::enum_<LEP_RAD_ARBITRARY_OFFSET_MODE_E_TAG>(handle,"LEP_RAD_ARBITRARY_OFFSET_MODE_E_TAG")
+        .value("LEP_RAD_ARBITRARY_OFFSET_MODE_MANUAL",LEP_RAD_ARBITRARY_OFFSET_MODE_E_TAG::LEP_RAD_ARBITRARY_OFFSET_MODE_MANUAL)
+        .value("LEP_RAD_ARBITRARY_OFFSET_MODE_AUTO",LEP_RAD_ARBITRARY_OFFSET_MODE_E_TAG::LEP_RAD_ARBITRARY_OFFSET_MODE_AUTO)
+        .value("LEP_RAD_END_ARBITRARY_OFFSET_MODE",LEP_RAD_ARBITRARY_OFFSET_MODE_E_TAG::LEP_RAD_END_ARBITRARY_OFFSET_MODE)
         .export_values();
 
-    py::class_<LEP_RAD_ARBITRARY_OFFSET_PARAMS_T>(handle,"LEP_RAD_ARBITRARY_OFFSET_PARAMS_T")
+    py::class_<LEP_RAD_ARBITRARY_OFFSET_PARAMS_T_TAG>(handle,"LEP_RAD_ARBITRARY_OFFSET_PARAMS_T_TAG")
         .def(py::init<>())
-        .def_readwrite("amplitude",&LEP_RAD_ARBITRARY_OFFSET_PARAMS_T::amplitude)
-        .def_readwrite("decay",&LEP_RAD_ARBITRARY_OFFSET_PARAMS_T::decay);
+        .def_readwrite("amplitude",&LEP_RAD_ARBITRARY_OFFSET_PARAMS_T_TAG::amplitude)
+        .def_readwrite("decay",&LEP_RAD_ARBITRARY_OFFSET_PARAMS_T_TAG::decay);
 
-    py::class_<LEP_RAD_SPOTMETER_OBJ_KELVIN_T>(handle,"LEP_RAD_SPOTMETER_OBJ_KELVIN_T")
+    py::class_<LEP_RAD_SPOTMETER_OBJ_KELVIN_T_TAG>(handle,"LEP_RAD_SPOTMETER_OBJ_KELVIN_T_TAG")
         .def(py::init<>())
-        .def_readwrite("radSpotmeterValue",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T::radSpotmeterValue)
-        .def_readwrite("radSpotmeterMaxValue",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T::radSpotmeterMaxValue)
-        .def_readwrite("radSpotmeterMinValue",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T::radSpotmeterMinValue)
-        .def_readwrite("radSpotmeterPopulation",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T::radSpotmeterPopulation);
+        .def_readwrite("radSpotmeterValue",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T_TAG::radSpotmeterValue)
+        .def_readwrite("radSpotmeterMaxValue",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T_TAG::radSpotmeterMaxValue)
+        .def_readwrite("radSpotmeterMinValue",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T_TAG::radSpotmeterMinValue)
+        .def_readwrite("radSpotmeterPopulation",&LEP_RAD_SPOTMETER_OBJ_KELVIN_T_TAG::radSpotmeterPopulation);
 
-    py::class_<LEP_RAD_RADIO_CAL_VALUES_T>(handle,"LEP_RAD_RADIO_CAL_VALUES_T")
+    py::class_<LEP_RAD_RADIO_CAL_VALUES_T_TAG>(handle,"LEP_RAD_RADIO_CAL_VALUES_T_TAG")
         .def(py::init<>())
-        .def_readwrite("radTauxCounts",&LEP_RAD_RADIO_CAL_VALUES_T::radTauxCounts)
-        .def_readwrite("radTfpaCounts",&LEP_RAD_RADIO_CAL_VALUES_T::radTfpaCounts)
-        .def_readwrite("radTauxKelvin",&LEP_RAD_RADIO_CAL_VALUES_T::radTauxKelvin)
-        .def_readwrite("radTfpaKelvin",&LEP_RAD_RADIO_CAL_VALUES_T::radTfpaKelvin);
+        .def_readwrite("radTauxCounts",&LEP_RAD_RADIO_CAL_VALUES_T_TAG::radTauxCounts)
+        .def_readwrite("radTfpaCounts",&LEP_RAD_RADIO_CAL_VALUES_T_TAG::radTfpaCounts)
+        .def_readwrite("radTauxKelvin",&LEP_RAD_RADIO_CAL_VALUES_T_TAG::radTauxKelvin)
+        .def_readwrite("radTfpaKelvin",&LEP_RAD_RADIO_CAL_VALUES_T_TAG::radTfpaKelvin);
 
     handle.def("LEP_GetRadTShutterMode",&LEP_GetRadTShutterMode);
     handle.def("LEP_SetRadTShutterMode",&LEP_SetRadTShutterMode);
