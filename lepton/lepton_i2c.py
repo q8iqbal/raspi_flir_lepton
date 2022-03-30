@@ -1,4 +1,4 @@
-from lib import lepton_sdk, lepton_sys, lepton_oem, lepton_type
+from lib import lepton_sdk, lepton_sys, lepton_oem, lepton_type, lepton_error_codes
 
 class LeptonI2c :
     def __init__(self):
