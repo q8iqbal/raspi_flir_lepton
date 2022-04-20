@@ -96,7 +96,7 @@ LEP_RESULT LEP_RunSysPing( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr )
 
    result = LEP_RunCommand( portDescPtr, ( LEP_COMMAND_ID )LEP_CID_SYS_PING );
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysStatus( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -119,7 +119,7 @@ LEP_RESULT LEP_GetSysStatus( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_SYS_CAM_STATUS,
                               ( LEP_ATTRIBUTE_T_PTR )sysStatusPtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 
@@ -143,7 +143,7 @@ LEP_RESULT LEP_GetSysFlirSerialNumber( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_SYS_FLIR_SERIAL_NUMBER,
                               ( LEP_ATTRIBUTE_T_PTR )sysSerialNumberBufPtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 #if USE_DEPRECATED_SERIAL_NUMBER_INTERFACE
 LEP_RESULT LEP_GetSysCustSerialNumber( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -162,25 +162,25 @@ LEP_RESULT LEP_GetSysCustSerialNumber( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_ATTRIBUTE_T_PTR )sysSerialNumberPtr,
                               attributeWordLength );
 
-   return( result );
+   return result;
 }
 #else
 
-LEP_RESULT LEP_GetSysCustSerialNumber(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                                      LEP_SYS_CUST_SERIAL_NUMBER_T_PTR sysCustSNPtr)
+LEP_RESULT LEP_GetSysCustSerialNumber( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                       LEP_SYS_CUST_SERIAL_NUMBER_T_PTR sysCustSNPtr )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 16;      /*32 byte string */
 
-   if(sysCustSNPtr == NULL)
+   if( sysCustSNPtr == NULL )
    {
-      return(LEP_BAD_ARG_POINTER_ERROR);
+      return( LEP_BAD_ARG_POINTER_ERROR );
    }
 
-   result = LEP_GetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_CUST_SERIAL_NUMBER,
-                             (LEP_ATTRIBUTE_T_PTR)sysCustSNPtr,
-                             attributeWordLength);
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_CUST_SERIAL_NUMBER,
+                              ( LEP_ATTRIBUTE_T_PTR )sysCustSNPtr,
+                              attributeWordLength );
 }
 #endif
 LEP_RESULT LEP_GetSysCameraUpTime( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -203,7 +203,7 @@ LEP_RESULT LEP_GetSysCameraUpTime( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_SYS_CAM_UPTIME,
                               ( LEP_ATTRIBUTE_T_PTR )sysCameraUpTimePtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysAuxTemperatureCelcius( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -222,7 +222,7 @@ LEP_RESULT LEP_GetSysAuxTemperatureCelcius( LEP_CAMERA_PORT_DESC_T_PTR portDescP
    result = LEP_GetSysAuxTemperatureKelvin( portDescPtr, &unitsKelvin );
    *auxTemperaturePtr = ( LEP_SYS_AUX_TEMPERATURE_CELCIUS_T )( ( ( unitsKelvin / 100 ) + ( ( unitsKelvin % 100 ) * .01 ) ) - 273.15 );
 
-   return( result );
+   return result;
 }
 
 
@@ -242,7 +242,7 @@ LEP_RESULT LEP_GetSysFpaTemperatureCelcius( LEP_CAMERA_PORT_DESC_T_PTR portDescP
    result = LEP_GetSysFpaTemperatureKelvin( portDescPtr, &unitsKelvin );
    *fpaTemperaturePtr = ( LEP_SYS_FPA_TEMPERATURE_CELCIUS_T )( ( ( unitsKelvin / 100 ) + ( ( unitsKelvin % 100 ) * .01 ) ) - 273.15 );
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysAuxTemperatureKelvin( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -265,7 +265,7 @@ LEP_RESULT LEP_GetSysAuxTemperatureKelvin( LEP_CAMERA_PORT_DESC_T_PTR portDescPt
                               ( LEP_COMMAND_ID )LEP_CID_SYS_AUX_TEMPERATURE_KELVIN,
                               ( LEP_ATTRIBUTE_T_PTR )auxTemperaturePtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysFpaTemperatureKelvin( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -288,7 +288,7 @@ LEP_RESULT LEP_GetSysFpaTemperatureKelvin( LEP_CAMERA_PORT_DESC_T_PTR portDescPt
                               ( LEP_COMMAND_ID )LEP_CID_SYS_FPA_TEMPERATURE_KELVIN,
                               ( LEP_ATTRIBUTE_T_PTR )fpaTemperaturePtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysTelemetryEnableState( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -310,7 +310,7 @@ LEP_RESULT LEP_GetSysTelemetryEnableState( LEP_CAMERA_PORT_DESC_T_PTR portDescPt
                               ( LEP_ATTRIBUTE_T_PTR )enableStatePtr,
                               attributeWordLength );
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_SetSysTelemetryEnableState( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -331,7 +331,7 @@ LEP_RESULT LEP_SetSysTelemetryEnableState( LEP_CAMERA_PORT_DESC_T_PTR portDescPt
                               ( LEP_COMMAND_ID )LEP_CID_SYS_TELEMETRY_ENABLE_STATE,
                               ( LEP_ATTRIBUTE_T_PTR ) & enableState,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysTelemetryLocation( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -353,7 +353,7 @@ LEP_RESULT LEP_GetSysTelemetryLocation( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_ATTRIBUTE_T_PTR )telemetryLocationPtr,
                               attributeWordLength );
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_SetSysTelemetryLocation( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -371,7 +371,7 @@ LEP_RESULT LEP_SetSysTelemetryLocation( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_ATTRIBUTE_T_PTR ) & telemetryLocation,
                               attributeWordLength );
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_RunFrameAverage( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr )
@@ -382,7 +382,7 @@ LEP_RESULT LEP_RunFrameAverage( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr )
    */
    result = LEP_RunCommand( portDescPtr, ( LEP_COMMAND_ID )LEP_CID_SYS_EXECTUE_FRAME_AVERAGE );
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_RunSysAverageFrames( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -401,7 +401,7 @@ LEP_RESULT LEP_RunSysAverageFrames( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
       result = LEP_RunFrameAverage( portDescPtr );
    }
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysFramesToAverage( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -427,7 +427,7 @@ LEP_RESULT LEP_GetSysFramesToAverage( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               attributeWordLength );
 
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_SetSysFramesToAverage( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -453,7 +453,7 @@ LEP_RESULT LEP_SetSysFramesToAverage( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               attributeWordLength );
 
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetSysSceneStatistics( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -472,133 +472,133 @@ LEP_RESULT LEP_GetSysSceneStatistics( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_ATTRIBUTE_T_PTR )sceneStatisticsPtr,
                               attributeWordLength );
 
-   return( result );
+   return result;
 }
 
-LEP_RESULT LEP_GetSysSceneRoi(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                              LEP_SYS_VIDEO_ROI_T_PTR sceneRoiPtr)
+LEP_RESULT LEP_GetSysSceneRoi( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                               LEP_SYS_VIDEO_ROI_T_PTR sceneRoiPtr )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 4;    /* roi consists of 4 16-bit values */
 
-   if(sceneRoiPtr == NULL)
+   if( sceneRoiPtr == NULL )
    {
-      return(LEP_BAD_ARG_POINTER_ERROR);
+      return( LEP_BAD_ARG_POINTER_ERROR );
    }
 
-   result = LEP_GetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_SCENE_ROI,
-                             (LEP_ATTRIBUTE_T_PTR)sceneRoiPtr,
-                             attributeWordLength);
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_SCENE_ROI,
+                              ( LEP_ATTRIBUTE_T_PTR )sceneRoiPtr,
+                              attributeWordLength );
 
-   return(result);
+   return result;
 }
-LEP_RESULT LEP_SetSysSceneRoi(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                              LEP_SYS_VIDEO_ROI_T sceneRoi)
+LEP_RESULT LEP_SetSysSceneRoi( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                               LEP_SYS_VIDEO_ROI_T sceneRoi )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 4;    /* roi consists of 4 16-bit values */
 
-   result = LEP_SetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_SCENE_ROI,
-                             (LEP_ATTRIBUTE_T_PTR)&sceneRoi,
-                             attributeWordLength);
+   result = LEP_SetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_SCENE_ROI,
+                              ( LEP_ATTRIBUTE_T_PTR ) & sceneRoi,
+                              attributeWordLength );
 
-   return(result);
+   return result;
 }
 
-LEP_RESULT LEP_GetSysThermalShutdownCount(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                                          LEP_SYS_THERMAL_SHUTDOWN_COUNTS_T_PTR thermalCountsPtr)
+LEP_RESULT LEP_GetSysThermalShutdownCount( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                           LEP_SYS_THERMAL_SHUTDOWN_COUNTS_T_PTR thermalCountsPtr )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 1;    /* 1 16-bit value */
 
-   if(thermalCountsPtr == NULL)
+   if( thermalCountsPtr == NULL )
    {
-      return(LEP_BAD_ARG_POINTER_ERROR);
+      return( LEP_BAD_ARG_POINTER_ERROR );
    }
 
-   result = LEP_GetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_THERMAL_SHUTDOWN_COUNT,
-                             (LEP_ATTRIBUTE_T_PTR)thermalCountsPtr,
-                             attributeWordLength);
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_THERMAL_SHUTDOWN_COUNT,
+                              ( LEP_ATTRIBUTE_T_PTR )thermalCountsPtr,
+                              attributeWordLength );
 
-   return(result);
+   return result;
 }
 
-LEP_RESULT LEP_GetSysShutterPosition(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                                  LEP_SYS_SHUTTER_POSITION_E_PTR shutterPositionPtr)
+LEP_RESULT LEP_GetSysShutterPosition( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                      LEP_SYS_SHUTTER_POSITION_E_PTR shutterPositionPtr )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 2;    /* enums are 32-bit */
 
-   if(shutterPositionPtr == NULL)
+   if( shutterPositionPtr == NULL )
    {
-      return(LEP_BAD_ARG_POINTER_ERROR);
+      return( LEP_BAD_ARG_POINTER_ERROR );
    }
 
-   result = LEP_GetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_SHUTTER_POSITION,
-                             (LEP_ATTRIBUTE_T_PTR)shutterPositionPtr,
-                             attributeWordLength);
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_SHUTTER_POSITION,
+                              ( LEP_ATTRIBUTE_T_PTR )shutterPositionPtr,
+                              attributeWordLength );
 
-   return(result);
+   return result;
 }
 
-LEP_RESULT LEP_SetSysShutterPosition(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                                  LEP_SYS_SHUTTER_POSITION_E shutterPosition)
+LEP_RESULT LEP_SetSysShutterPosition( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                      LEP_SYS_SHUTTER_POSITION_E shutterPosition )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 2;     /* enums are 32-bit */
 
-   if(shutterPosition >= LEP_SYS_SHUTTER_POSITION_END)
+   if( shutterPosition >= LEP_SYS_SHUTTER_POSITION_END )
    {
-      return(LEP_RANGE_ERROR);
+      return( LEP_RANGE_ERROR );
    }
 
-   result = LEP_SetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_SHUTTER_POSITION,
-                             (LEP_ATTRIBUTE_T_PTR)&shutterPosition,
-                             attributeWordLength);
+   result = LEP_SetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_SHUTTER_POSITION,
+                              ( LEP_ATTRIBUTE_T_PTR ) & shutterPosition,
+                              attributeWordLength );
 
-   return(result);
+   return result;
 }
 
 
 LEP_RESULT LEP_GetSysFfcShutterModeObj( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                                     LEP_SYS_FFC_SHUTTER_MODE_OBJ_T_PTR shutterModeObjPtr )
+                                        LEP_SYS_FFC_SHUTTER_MODE_OBJ_T_PTR shutterModeObjPtr )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 16;
 
-   if(shutterModeObjPtr == NULL)
+   if( shutterModeObjPtr == NULL )
    {
-      return(LEP_BAD_ARG_POINTER_ERROR);
+      return( LEP_BAD_ARG_POINTER_ERROR );
    }
 
-   result = LEP_GetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_FFC_SHUTTER_MODE_OBJ,
-                             (LEP_ATTRIBUTE_T_PTR)shutterModeObjPtr,
-                             attributeWordLength);
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_FFC_SHUTTER_MODE_OBJ,
+                              ( LEP_ATTRIBUTE_T_PTR )shutterModeObjPtr,
+                              attributeWordLength );
 
-   return(result);
+   return result;
 }
 
 LEP_RESULT LEP_SetSysFfcShutterModeObj( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
-                                     LEP_SYS_FFC_SHUTTER_MODE_OBJ_T shutterModeObj )
+                                        LEP_SYS_FFC_SHUTTER_MODE_OBJ_T shutterModeObj )
 {
    LEP_RESULT result = LEP_OK;
    LEP_UINT16 attributeWordLength = 16;
 
-   result = LEP_SetAttribute(portDescPtr,
-                             (LEP_COMMAND_ID)LEP_CID_SYS_FFC_SHUTTER_MODE_OBJ,
-                             (LEP_ATTRIBUTE_T_PTR)&shutterModeObj,
-                             attributeWordLength);
+   result = LEP_SetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_FFC_SHUTTER_MODE_OBJ,
+                              ( LEP_ATTRIBUTE_T_PTR ) & shutterModeObj,
+                              attributeWordLength );
 
-   return(result);
+   return result;
 }
 
-LEP_RESULT LEP_RunSysFFCNormalization(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr)
+LEP_RESULT LEP_RunSysFFCNormalization( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr )
 {
    LEP_RESULT result = LEP_OK;
    LEP_SYS_STATUS_E sysStatus = LEP_SYS_STATUS_BUSY;
@@ -608,8 +608,8 @@ LEP_RESULT LEP_RunSysFFCNormalization(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr)
    {
       LEP_GetSysFFCStatus( portDescPtr, &sysStatus );
    }
-   
-   return( result );
+
+   return result;
 }
 
 LEP_RESULT LEP_GetSysFFCStatus( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -628,8 +628,116 @@ LEP_RESULT LEP_GetSysFFCStatus( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                               ( LEP_ATTRIBUTE_T_PTR )ffcStatusPtr,
                               attributeWordLength );
 
-   return( result );
+   return result;
 }
+
+LEP_RESULT LEP_GetSysGainMode( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                               LEP_SYS_GAIN_MODE_E_PTR gainModePtr )
+{
+   LEP_RESULT  result = LEP_OK;
+   LEP_UINT16 attributeWordLength = 2; /* enums are 32-bit */
+
+   if( gainModePtr == NULL )
+   {
+      return( LEP_BAD_ARG_POINTER_ERROR );
+   }
+
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_GAIN_MODE,
+                              ( LEP_ATTRIBUTE_T_PTR )gainModePtr,
+                              attributeWordLength );
+
+   return result;
+}
+
+LEP_RESULT LEP_SetSysGainMode( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                               LEP_SYS_GAIN_MODE_E gainMode )
+{
+   LEP_RESULT result = LEP_OK;
+   LEP_UINT16 attributeWordLength = 2;
+
+   result = LEP_SetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_GAIN_MODE,
+                              ( LEP_ATTRIBUTE_T_PTR ) & gainMode,
+                              attributeWordLength );
+
+   return result;
+}
+
+
+LEP_RESULT LEP_GetSysGainModeObj( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                  LEP_SYS_GAIN_MODE_OBJ_T_PTR gainModeObjPtr )
+{
+   LEP_RESULT result = LEP_OK;
+   LEP_UINT16 attributeWordLength = 14;
+
+   if( gainModeObjPtr == NULL )
+   {
+      return( LEP_BAD_ARG_POINTER_ERROR );
+   }
+
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_GAIN_MODE_OBJ,
+                              ( LEP_ATTRIBUTE_T_PTR )gainModeObjPtr,
+                              attributeWordLength );
+
+   return result;
+}
+
+LEP_RESULT LEP_SetSysGainModeObj( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                  LEP_SYS_GAIN_MODE_OBJ_T gainModeObj )
+{
+   LEP_RESULT result = LEP_OK;
+   LEP_UINT16 attributeWordLength = 14;
+
+   result = LEP_SetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_GAIN_MODE_OBJ,
+                              ( LEP_ATTRIBUTE_T_PTR ) & gainModeObj,
+                              attributeWordLength );
+
+   return result;
+}
+
+
+
+LEP_RESULT LEP_GetSysFFCStates( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                LEP_SYS_FFC_STATES_E_PTR ffcStatePtr )
+{
+   LEP_RESULT  result = LEP_OK;
+   LEP_UINT16 attributeWordLength = 2;
+
+   if( ffcStatePtr == NULL )
+   {
+      return( LEP_BAD_ARG_POINTER_ERROR );
+   }
+
+   result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_FFC_STATE,
+                              ( LEP_ATTRIBUTE_T_PTR )ffcStatePtr,
+                              attributeWordLength );
+
+   return result;
+}
+
+LEP_RESULT LEP_GetSysBoresightValues( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
+                                      LEP_SYS_BORESIGHT_VALUES_T_PTR boresightValuesPtr)
+{
+    LEP_RESULT  result = LEP_OK;
+    LEP_UINT16 attributeWordLength = 6;
+
+    if( boresightValuesPtr == NULL )
+    {
+       return( LEP_BAD_ARG_POINTER_ERROR );
+    }
+
+    result = LEP_GetAttribute( portDescPtr,
+                              ( LEP_COMMAND_ID )LEP_CID_SYS_BORESIGHT_VALUES,
+                              ( LEP_ATTRIBUTE_T_PTR )boresightValuesPtr,
+                              attributeWordLength );
+
+    return result;
+}
+
 
 /******************************************************************************/
 /** PRIVATE MODULE FUNCTIONS                                                 **/

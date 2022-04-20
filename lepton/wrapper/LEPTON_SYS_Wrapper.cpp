@@ -11,6 +11,7 @@
 #include <pybind11/chrono.h>
 
 #include "../sdk/LEPTON_SYS.h"
+#include "../sdk/LEPTON_ErrorCodes.h"
 
 namespace py = pybind11;
 
@@ -36,6 +37,11 @@ PYBIND11_MODULE(lepton_sys, handle){
     handle.attr("LEP_CID_SYS_FFC_SHUTTER_MODE_OBJ") = py::int_(LEP_CID_SYS_FFC_SHUTTER_MODE_OBJ);
     handle.attr("FLR_CID_SYS_RUN_FFC") = py::int_(FLR_CID_SYS_RUN_FFC);
     handle.attr("LEP_CID_SYS_FFC_STATUS") = py::int_(LEP_CID_SYS_FFC_STATUS);
+    handle.attr("LEP_CID_SYS_GAIN_MODE") = py::int_(LEP_CID_SYS_GAIN_MODE);
+    handle.attr("LEP_CID_SYS_FFC_STATE") = py::int_(LEP_CID_SYS_FFC_STATE);
+    handle.attr("LEP_CID_SYS_GAIN_MODE_OBJ") = py::int_(LEP_CID_SYS_GAIN_MODE_OBJ);
+    handle.attr("LEP_CID_SYS_GAIN_MODE_DESIRED_FLAG") = py::int_(LEP_CID_SYS_GAIN_MODE_DESIRED_FLAG);
+    handle.attr("LEP_CID_SYS_BORESIGHT_VALUES") = py::int_(LEP_CID_SYS_BORESIGHT_VALUES);
     handle.attr("LEP_SYS_MAX_FRAMES_TO_AVERAGE") = py::int_(LEP_SYS_MAX_FRAMES_TO_AVERAGE);
     handle.attr("LEP_SYS_MAX_SERIAL_NUMBER_CHAR_SIZE") = py::int_(LEP_SYS_MAX_SERIAL_NUMBER_CHAR_SIZE);
 
@@ -53,14 +59,16 @@ PYBIND11_MODULE(lepton_sys, handle){
         .value("LEP_SYSTEM_IN_LOW_POWER_MODE",LEP_SYSTEM_STATUS_STATES_E_TAG::LEP_SYSTEM_IN_LOW_POWER_MODE)
         .value("LEP_SYSTEM_GOING_INTO_STANDBY",LEP_SYSTEM_STATUS_STATES_E_TAG::LEP_SYSTEM_GOING_INTO_STANDBY)
         .value("LEP_SYSTEM_FLAT_FIELD_IN_PROCESS",LEP_SYSTEM_STATUS_STATES_E_TAG::LEP_SYSTEM_FLAT_FIELD_IN_PROCESS)
+        .value("LEP_SYSTEM_FLAT_FIELD_IMMINENT",LEP_SYSTEM_STATUS_STATES_E_TAG::LEP_SYSTEM_FLAT_FIELD_IMMINENT)
+        .value("LEP_SYSTEM_THERMAL_SHUTDOWN_IMMINENT",LEP_SYSTEM_STATUS_STATES_E_TAG::LEP_SYSTEM_THERMAL_SHUTDOWN_IMMINENT)
         .value("LEP_SYSTEM_END_STATES",LEP_SYSTEM_STATUS_STATES_E_TAG::LEP_SYSTEM_END_STATES)
         .export_values();
 
-    py::class_<LEP_STATUS_T>(handle,"LEP_STATUS_T")
+    py::class_<LEP_STATUS_T_TAG>(handle,"LEP_STATUS_T_TAG")
         .def(py::init<>())
-        .def_readwrite("camStatus", &LEP_STATUS_T::camStatus)
-        .def_readwrite("commandCount", &LEP_STATUS_T::commandCount)
-        .def_readwrite("reserved", &LEP_STATUS_T::reserved);
+        .def_readwrite("camStatus", &LEP_STATUS_T_TAG::camStatus)
+        .def_readwrite("commandCount", &LEP_STATUS_T_TAG::commandCount)
+        .def_readwrite("reserved", &LEP_STATUS_T_TAG::reserved);
 
     py::enum_<LEP_SYS_TELEMETRY_ENABLE_STATE_E_TAG>(handle,"LEP_SYS_TELEMETRY_ENABLE_STATE_E_TAG")
         .value("LEP_TELEMETRY_DISABLED",LEP_SYS_TELEMETRY_ENABLE_STATE_E_TAG::LEP_TELEMETRY_DISABLED)
@@ -147,14 +155,58 @@ PYBIND11_MODULE(lepton_sys, handle){
         .def_readwrite("desiredFfcTempDelta",&LEP_SYS_FFC_SHUTTER_MODE_OBJ_T_TAG::desiredFfcTempDelta)
         .def_readwrite("imminentDelay",&LEP_SYS_FFC_SHUTTER_MODE_OBJ_T_TAG::imminentDelay);
 
-    py::enum_<LEP_SYS_STATUS_E>(handle,"LEP_SYS_STATUS_E")
-        .value("LEP_SYS_STATUS_WRITE_ERROR",LEP_SYS_STATUS_E::LEP_SYS_STATUS_WRITE_ERROR)
-        .value("LEP_SYS_STATUS_ERROR",LEP_SYS_STATUS_E::LEP_SYS_STATUS_ERROR)
-        .value("LEP_SYS_STATUS_READY",LEP_SYS_STATUS_E::LEP_SYS_STATUS_READY)
-        .value("LEP_SYS_STATUS_BUSY",LEP_SYS_STATUS_E::LEP_SYS_STATUS_BUSY)
-        .value("LEP_SYS_FRAME_AVERAGE_COLLECTING_FRAMES",LEP_SYS_STATUS_E::LEP_SYS_FRAME_AVERAGE_COLLECTING_FRAMES)
-        .value("LEP_SYS_STATUS_END",LEP_SYS_STATUS_E::LEP_SYS_STATUS_END)
+    py::enum_<LEP_SYS_STATUS_E_TAG>(handle,"LEP_SYS_STATUS_E_TAG")
+        .value("LEP_SYS_STATUS_WRITE_ERROR",LEP_SYS_STATUS_E_TAG::LEP_SYS_STATUS_WRITE_ERROR)
+        .value("LEP_SYS_STATUS_ERROR",LEP_SYS_STATUS_E_TAG::LEP_SYS_STATUS_ERROR)
+        .value("LEP_SYS_STATUS_READY",LEP_SYS_STATUS_E_TAG::LEP_SYS_STATUS_READY)
+        .value("LEP_SYS_STATUS_BUSY",LEP_SYS_STATUS_E_TAG::LEP_SYS_STATUS_BUSY)
+        .value("LEP_SYS_FRAME_AVERAGE_COLLECTING_FRAMES",LEP_SYS_STATUS_E_TAG::LEP_SYS_FRAME_AVERAGE_COLLECTING_FRAMES)
+        .value("LEP_SYS_STATUS_END",LEP_SYS_STATUS_E_TAG::LEP_SYS_STATUS_END)
         .export_values();
+
+    py::enum_<LEP_SYS_GAIN_MODE_E_TAG>(handle,"LEP_SYS_GAIN_MODE_E_TAG")
+        .value("LEP_SYS_GAIN_MODE_HIGH",LEP_SYS_GAIN_MODE_E_TAG::LEP_SYS_GAIN_MODE_HIGH)
+        .value("LEP_SYS_GAIN_MODE_LOW",LEP_SYS_GAIN_MODE_E_TAG::LEP_SYS_GAIN_MODE_LOW)
+        .value("LEP_SYS_GAIN_MODE_AUTO",LEP_SYS_GAIN_MODE_E_TAG::LEP_SYS_GAIN_MODE_AUTO)
+        .value("LEP_SYS_END_GAIN_MODE",LEP_SYS_GAIN_MODE_E_TAG::LEP_SYS_END_GAIN_MODE)
+        .export_values();
+
+    py::class_<LEP_SYS_GAIN_MODE_ROI_T_TAG>(handle,"LEP_SYS_GAIN_MODE_ROI_T_TAG")
+        .def_readwrite("startCol",&LEP_SYS_GAIN_MODE_ROI_T_TAG::startCol)
+        .def_readwrite("startRow",&LEP_SYS_GAIN_MODE_ROI_T_TAG::startRow)
+        .def_readwrite("endCol",&LEP_SYS_GAIN_MODE_ROI_T_TAG::endCol)
+        .def_readwrite("endRow",&LEP_SYS_GAIN_MODE_ROI_T_TAG::endRow);
+
+    py::class_<LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG>(handle,"LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG")
+        .def_readwrite("sys_P_high_to_low",&LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG::sys_P_high_to_low)
+        .def_readwrite("sys_P_high_to_low",&LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG::sys_P_low_to_high)
+        .def_readwrite("sys_P_high_to_low",&LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG::sys_C_high_to_low)
+        .def_readwrite("sys_P_high_to_low",&LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG::sys_C_low_to_high)
+        .def_readwrite("sys_P_high_to_low",&LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG::sys_T_high_to_low)
+        .def_readwrite("sys_P_high_to_low",&LEP_SYS_GAIN_MODE_THRESHOLDS_T_TAG::sys_T_low_to_high);
+
+    py::class_<LEP_SYS_GAIN_MODE_OBJ_T_TAG>(handle,"LEP_SYS_GAIN_MODE_OBJ_T_TAG")
+        .def_readwrite("sysGainModeROI",&LEP_SYS_GAIN_MODE_OBJ_T_TAG::sysGainModeROI)
+        .def_readwrite("sysGainModeThresholds",&LEP_SYS_GAIN_MODE_OBJ_T_TAG::sysGainModeROI)
+        .def_readwrite("sysGainRoiPopulation",&LEP_SYS_GAIN_MODE_OBJ_T_TAG::sysGainRoiPopulation)
+        .def_readwrite("sysGainModeTempEnabled",&LEP_SYS_GAIN_MODE_OBJ_T_TAG::sysGainModeTempEnabled)
+        .def_readwrite("sysGainModeFluxThresholdLow",&LEP_SYS_GAIN_MODE_OBJ_T_TAG::sysGainModeFluxThresholdLow)
+        .def_readwrite("sysGainModeFluxThresholdHigh",&LEP_SYS_GAIN_MODE_OBJ_T_TAG::sysGainModeFluxThresholdHigh);
+    
+    py::enum_<LEP_SYS_FFC_STATES_E_TAG>(handle,"LEP_SYS_FFC_STATES_E_TAG")
+        .value("LEP_SYS_FFC_NEVER_COMMANDED",LEP_SYS_FFC_STATES_E_TAG::LEP_SYS_FFC_NEVER_COMMANDED)
+        .value("LEP_SYS_FFC_IMMINENT",LEP_SYS_FFC_STATES_E_TAG::LEP_SYS_FFC_IMMINENT)
+        .value("LEP_SYS_FFC_IN_PROCESS",LEP_SYS_FFC_STATES_E_TAG::LEP_SYS_FFC_IN_PROCESS)
+        .value("LEP_SYS_FFC_DONE",LEP_SYS_FFC_STATES_E_TAG::LEP_SYS_FFC_DONE)
+        .value("LEP_SYS_END_FFC_STATES",LEP_SYS_FFC_STATES_E_TAG::LEP_SYS_END_FFC_STATES)
+        .export_values();
+
+    py::class_<LEP_SYS_BORESIGHT_VALUES_T_TAG>(handle,"LEP_SYS_BORESIGHT_VALUES_T_TAG")
+        .def_readwrite("sysGainModeROI",&LEP_SYS_BORESIGHT_VALUES_T_TAG::targetRow)
+        .def_readwrite("sysGainModeROI",&LEP_SYS_BORESIGHT_VALUES_T_TAG::targetCol)
+        .def_readwrite("sysGainModeROI",&LEP_SYS_BORESIGHT_VALUES_T_TAG::targetRotation)
+        .def_readwrite("sysGainModeROI",&LEP_SYS_BORESIGHT_VALUES_T_TAG::fovX)
+        .def_readwrite("sysGainModeROI",&LEP_SYS_BORESIGHT_VALUES_T_TAG::fovY);
 
     handle.def("LEP_RunSysPing",&LEP_RunSysPing);
     handle.def("LEP_GetSysStatus",&LEP_GetSysStatus);
@@ -164,7 +216,12 @@ PYBIND11_MODULE(lepton_sys, handle){
     handle.def("LEP_GetSysAuxTemperatureCelcius",&LEP_GetSysAuxTemperatureCelcius);
     handle.def("LEP_GetSysFpaTemperatureCelcius",&LEP_GetSysFpaTemperatureCelcius);
     handle.def("LEP_GetSysAuxTemperatureKelvin",&LEP_GetSysAuxTemperatureKelvin);
-    handle.def("LEP_GetSysFpaTemperatureKelvin",&LEP_GetSysFpaTemperatureKelvin);
+    handle.def("LEP_GetSysFpaTemperatureKelvin",[]( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr)->py::tuple{
+                                                LEP_RESULT  result = LEP_OK;
+                                                LEP_SYS_FPA_TEMPERATURE_KELVIN_T fpaTemperature;
+                                                result = LEP_GetSysFpaTemperatureKelvin(portDescPtr, &fpaTemperature);
+                                                return py::make_tuple(result, fpaTemperature);
+                                           });
     handle.def("LEP_GetSysTelemetryEnableState",&LEP_GetSysTelemetryEnableState);
     handle.def("LEP_SetSysTelemetryEnableState",&LEP_SetSysTelemetryEnableState);
     handle.def("LEP_GetSysTelemetryLocation",&LEP_GetSysTelemetryLocation);
@@ -183,4 +240,11 @@ PYBIND11_MODULE(lepton_sys, handle){
     handle.def("LEP_SetSysFfcShutterModeObj",&LEP_SetSysFfcShutterModeObj);
     handle.def("LEP_GetSysFFCStatus",&LEP_GetSysFFCStatus);
     handle.def("LEP_RunSysFFCNormalization",&LEP_RunSysFFCNormalization);
+    handle.def("LEP_GetSysGainMode",&LEP_GetSysGainMode);
+    handle.def("LEP_SetSysGainMode",&LEP_SetSysGainMode);
+    handle.def("LEP_GetSysFFCStates",&LEP_GetSysFFCStates);
+    handle.def("LEP_GetSysGainModeObj",&LEP_GetSysGainModeObj);
+    handle.def("LEP_SetSysGainModeObj",&LEP_SetSysGainModeObj);
+    handle.def("LEP_GetSysBoresightValues",&LEP_GetSysBoresightValues);
+
 }
