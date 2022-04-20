@@ -35,7 +35,8 @@ while True:
     odd_index_byte = np.left_shift(data[4::2],8)
     even_index_byte = np.array(data[5::2])
     try:
-        frame[packet_number] = odd_index_byte + even_index_byte
+        if frame[packet_number] == 0 :
+            frame[packet_number] = odd_index_byte + even_index_byte
     except IndexError:
         continue
 
